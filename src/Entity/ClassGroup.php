@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\Entity\classGroup;
+use App\Entity\Student;
 
 #[ORM\Entity(repositoryClass: ClassGroupRepository::class)]
 class ClassGroup
@@ -50,16 +50,6 @@ class ClassGroup
         if (!$this->students->contains($students)) {
             $this->students[] = $students;
             $students->setClassGroup($this);
-        }
-        return $this;
-    }
-    
-    public function removeBook(Book $book): self
-    {
-        if ($this->books->removeElement($book)) {
-            if ($book->getAuthor() === $this) {
-                $book->setAuthor(null);
-            }
         }
         return $this;
     }

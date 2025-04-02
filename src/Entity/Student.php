@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\StudentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\ClassGroup;
 use App\Entity\Project;
 
@@ -29,10 +31,10 @@ class Student
     private ?\DateTimeInterface $dateOfBirth = null;
 
     #[ORM\ManyToOne(targetEntity: ClassGroup::class, inversedBy: 'students')]
-    private Category $classGroup;
+    private ClassGroup $classGroup;
 
-    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'students')]
-    private $projects;
+    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'students')]
+    private Collection $projects;
 
     public function __construct()
     {
@@ -43,6 +45,7 @@ class Student
     {
         return $this->projects;
     }
+
     public function addProject(Project $project): self
     {
         if (!$this->projects->contains($project)) {
@@ -50,18 +53,19 @@ class Student
         }
         return $this;
     }
+
     public function removeProject(Project $project): self
     {
         $this->projects->removeElement($project);
         return $this;
     }
 
-    public function getClassGroup(): ?Category
+    public function getClassGroup(): ?ClassGroup
     {
         return $this->classGroup;
     }
 
-    public function setClassGroup(?Category $classGroup): self
+    public function setClassGroup(?ClassGroup $classGroup): self
     {
         $this->classGroup = $classGroup;
         return $this;
@@ -77,7 +81,7 @@ class Student
         return $this->firstName;
     }
 
-    public function setName(string $firstName): static
+    public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
         return $this;

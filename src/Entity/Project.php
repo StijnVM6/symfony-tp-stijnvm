@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ProjectRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\Student;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
@@ -22,7 +24,7 @@ class Project
     private ?int $totalGrade = null;
 
     #[ORM\ManyToMany(targetEntity: Student::class, mappedBy: "projects")]
-    private $students;
+    private Collection $students;
 
     public function __construct()
     {
