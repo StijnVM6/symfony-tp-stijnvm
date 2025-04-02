@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="example-wrapper">
+
+    <h1>Student:</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>First Name:</th>
+                <td>{{ student.firstName }}</td>
+            </tr>
+                
+            <tr>
+                <th>Last Name:</th>
+                <td>{{ student.lastName }}</td>
+            </tr>
+
+            <tr>
+                <th>Email:</th>
+                <td>{{ student.email }}</td>
+            </tr>
+
+            <tr>
+                <th>Date of birth:</th>
+                <td>{{ student.dateOfBirth|date('Y-m-d')  }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

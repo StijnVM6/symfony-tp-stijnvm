@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StudentController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1>List of students:</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/stijn/dev/symfony-tp-stijnvm/src/Controller/StudentController.php</code></li>
-        <li>Your template at <code>/home/stijn/dev/symfony-tp-stijnvm/templates/student/index.html.twig</code></li>
-    </ul>
+<a href="{{ path('student_create') }}">New student</a>
+
+    <table>
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>first name</td>
+                <td>last name</td>
+                {# <td>email</td>
+                <td>date of birth</td> #}
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>
+                        <a href="{{ path('student_show', {'id': student.id}) }}">
+                            {{student.id}}
+                        </a>
+                    </td>
+                    <td>{{ student.firstName }}</td>
+                    <td>{{ student.lastName }}</td>
+                    {# <td>{{ student.email }}</td> #}
+                    {# <td>{{ student.dateOfBirth }}</td> #}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 {% endblock %}
