@@ -22,17 +22,20 @@ class StudentType extends AbstractType
             ->add('email')
             ->add('dateOfBirth', null, [
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('classGroup', EntityType::class, [
                 'class' => ClassGroup::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
+                'label' => 'Class group:',
             ])
             ->add('projects', EntityType::class, [
                 'class' => Project::class,
-                'choice_label' => 'id',
+                'choice_label' => 'subject',
                 'multiple' => true,
+                'label' => 'Projects:',
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Add new student'])
+            ->add('submit', SubmitType::class, ['label' => 'Save'])
         ;
     }
 
