@@ -14,10 +14,27 @@ use Doctrine\ORM\EntityManagerInterface;
 final class StudentController extends AbstractController
 {
     #[Route('/students', name: 'app_students')]
-    public function index(StudentRepository $studentRepository): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, StudentRepository $studentRepository): Response
     {
+        $limit = 10;
+        $page = max(1, (int) $request->query->get('page', 1));
+        $offset = ($page - 1) * $limit;
+
+        $query = $entityManager->getRepository(Student::class)
+            ->createQueryBuilder('student')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery();
+
+        $students = $query->getResult();
+
+        $totalCount = $entityManager->getRepository(Student::class)->count([]);
+        $totalPages = ceil($totalCount / $limit);
+
         return $this->render('student/index.html.twig', [
-            'students' => $studentRepository->findAll(),
+            'students' => $students,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 

@@ -35,4 +35,16 @@
     </tbody>
 </table>
 
+<div class="pagination">
+    {% if currentPage > 1 %}
+        <a href="{{ path('app_students', { 'page': currentPage - 1 }) }}">&laquo; Previous</a>
+    {% endif %}
+
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+
+    {% if currentPage < totalPages %}
+        <a href="{{ path('app_students', { 'page': currentPage + 1 }) }}">Next &raquo;</a>
+    {% endif %}
+</div>
+
 {% endblock %}
