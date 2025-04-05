@@ -37,6 +37,10 @@
 
 <div class="pagination">
     {% if currentPage > 1 %}
+        <a href="{{ path('app_students', { 'page': 1 }) }}">First</a>
+    {% endif %}
+
+    {% if currentPage > 1 %}
         <a href="{{ path('app_students', { 'page': currentPage - 1 }) }}">&laquo; Previous</a>
     {% endif %}
 
@@ -44,6 +48,10 @@
 
     {% if currentPage < totalPages %}
         <a href="{{ path('app_students', { 'page': currentPage + 1 }) }}">Next &raquo;</a>
+    {% endif %}
+
+    {% if currentPage < totalPages %}
+        <a href="{{ path('app_students', { 'page': totalPages }) }}">Last</a>
     {% endif %}
 </div>
 
