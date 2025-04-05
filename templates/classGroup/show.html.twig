@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('app_classGroups') }}">Return to the class groups page</a>
+
+<h1>Class group:</h1>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Name:</th>
+            <td>{{ classGroup.name }}</td>
+        </tr>
+            
+        <tr>
+            <th>Class year:</th>
+            <td>{{ classGroup.year }}</td>
+        </tr>
+
+        <tr>
+            <th>Students:</th>
+            <td>
+                <ul>
+                    {% for student in classGroup.students %}
+                        <li><a href="{{ path('student_show', { id: student.id }) }}">
+                            {{ student.firstName }} {{ student.lastName|upper }}
+                        </a></li>
+                    {% else %}
+                        <li><em>No students in this class.</em></li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="{{ path('classGroup_edit', {'id': classGroup.id}) }}">Edit</a>
+<a href="{{ path('classGroup_delete', {'id': classGroup.id}) }}">Delete</a>
+
+{% endblock %}

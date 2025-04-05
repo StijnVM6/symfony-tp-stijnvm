@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('app_classGroups') }}">Return to the class groups page</a>
+
+<h1>Update Class Group:</h1>
+
+{{ include("/classGroup/_form.html.twig") }}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Create project:</h1>
+
+<a href="{{ path('app_projects') }}">Return to the projects page</a>
+
+{{ include("/project/_form.html.twig") }}
+
+{% endblock %}

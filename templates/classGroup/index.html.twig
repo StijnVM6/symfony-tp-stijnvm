@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('app_home') }}">Homepage</a>
+
+<h1>List of classGroups:</h1>
+
+<a href="{{ path('classGroup_create') }}">Create classGroup</a>
+
+<table>
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>Name</td>
+            <td>Year</td>
+            {# <td>Students</td> #}
+        </tr>
+    </thead>
+    <tbody>
+        {% for classGroup in classGroups %}
+            <tr>
+                <td>
+                    <a href="{{ path('classGroup_show', {'id': classGroup.id}) }}">
+                        {{classGroup.id}}
+                    </a>
+                </td>
+                <td>{{ classGroup.name }}</td>
+                <td>{{ classGroup.year }}</td>
+                {# <td>{{ classGroup.students }}</td> #}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

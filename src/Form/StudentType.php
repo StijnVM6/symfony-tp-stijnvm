@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\ClassGroup;
 use App\Entity\Project;
 use App\Entity\Student;
-use PhpParser\Node\Stmt\Label;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

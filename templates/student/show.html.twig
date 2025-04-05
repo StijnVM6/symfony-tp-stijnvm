@@ -2,6 +2,8 @@
 
 {% block body %}
 
+<a href="{{ path('app_students') }}">Return to the students page</a>
+
 <h1>Student:</h1>
 
 <table>
@@ -23,7 +25,27 @@
 
         <tr>
             <th>Date of birth:</th>
-            <td>{{ student.dateOfBirth }}</td>
+            <td>{{ student.dateOfBirth ? student.dateOfBirth|date('Y-m-d') : '' }}</td>
+        </tr>
+
+        <tr>
+            <th>Class:</th>
+            <td><a href="{{ path('classGroup_show', { id: student.classGroup.id }) }}">{{ student.classGroup.name }}</a></td>
+        </tr>
+
+        <tr>
+            <th>Projects:</th>
+            <td>
+                <ul>
+                    {% for project in student.projects %}
+                        <li><a href="{{ path('project_show', { id: project.id }) }}">
+                            {{ project.subject }}
+                        </a></li>
+                    {% else %}
+                        <li><em>This student has no projects.</em></li>
+                    {% endfor %}
+                </ul>
+            </td>
         </tr>
     </tbody>
 </table>

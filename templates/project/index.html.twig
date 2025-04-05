@@ -1,16 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProjectController!{% endblock %}
-
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<a href="{{ path('app_home') }}">Homepage</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/stijn/dev/symfony-tp-stijnvm/src/Controller/ProjectController.php</code></li>
-        <li>Your template at <code>/home/stijn/dev/symfony-tp-stijnvm/templates/project/index.html.twig</code></li>
-    </ul>
-</div>
+<h1>List of projects:</h1>
+
+<a href="{{ path('project_create') }}">Create project</a>
+
+<table>
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>Subject</td>
+            <td>Grade</td>
+            {# <td>Students</td> #}
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>
+                    <a href="{{ path('project_show', {'id': project.id}) }}">
+                        {{project.id}}
+                    </a>
+                </td>
+                <td>{{ project.subject }}</td>
+                <td>{{ project.totalGrade }}</td>
+                {# <td>{{ project.students }}</td> #}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

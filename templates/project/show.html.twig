@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('app_projects') }}">Return to the projects page</a>
+
+<h1>Project:</h1>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Subject:</th>
+            <td>{{ project.subject }}</td>
+        </tr>
+            
+        <tr>
+            <th>Total grade:</th>
+            <td>{{ project.totalGrade }}</td>
+        </tr>
+
+        <tr>
+            <th>Students:</th>
+            <td>
+                <ul>
+                    {% for student in project.students %}
+                        <li><a href="{{ path('student_show', { id: student.id }) }}">
+                            {{ student.firstName }} {{ student.lastName|upper }}
+                        </a></li>
+                    {% else %}
+                        <li><em>No students in this project.</em></li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+<a href="{{ path('project_edit', {'id': project.id}) }}">Edit</a>
+<a href="{{ path('project_delete', {'id': project.id}) }}">Delete</a>
+
+{% endblock %}
