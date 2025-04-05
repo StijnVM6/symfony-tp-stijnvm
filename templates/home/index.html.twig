@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<h1>Symfony TP Stijn Vande Maele</h1>
+
+<tr>
+    <td>
+        <a href="{{ path('app_students') }}">View students</a>
+    </td>
+    <td>
+        <a href="{{ path('app_classgroups') }}">View class groups</a>
+    </td>
+    <td>
+        <a href="{{ path('app_projects') }}">View projects</a>
+    </td>
+
+</tr>
+
+{% endblock %}
