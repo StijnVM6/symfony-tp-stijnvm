@@ -2,13 +2,25 @@
 
 {% block body %}
 
-<h1>Delete Class Group</h1>
-<p>Are you sure?</p>
+<h2>Reassign students from "{{ classGroup.name }}" before deletion</h2>
 
-<form method='POST'>
-    <button>Yes</button>
-    <a href="{{ path('classGroup_show', {'id': id}) }}">No</a>
+<form method="POST">
+    <label for="new_class_group">Select new class group:</label>
+    <select name="new_class_group" id="new_class_group" required>
+        {% for group in otherClassGroups %}
+            <option value="{{ group.id }}">{{ group.name }}</option>
+        {% endfor %}
+    </select>
+
+    <h3>Students to be reassigned:</h3>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.firstName }} {{ student.lastName }}</li>
+        {% endfor %}
+    </ul>
+
+    <button type="submit">Reassign and Delete Class</button>
+    <a href="{{ path('classGroup_show', {'id': classGroup.id}) }}">Cancel</a>
 </form>
-
 
 {% endblock %}

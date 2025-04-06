@@ -67,17 +67,44 @@ final class ClassGroupController extends AbstractController
     }
 
     #[Route('/classGroup/{id<\d+>}/delete', name: 'classGroup_delete')]
-    public function delete(Request $request, ClassGroup $classGroup, EntityManagerInterface $entityManager): Response
-    {
+    public function delete(
+        Request $request,
+        ClassGroup $classGroup,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $students = $classGroup->getStudents();
+
+        // Get all other class groups (excluding current one)
+        $otherClassGroups = $entityManager->getRepository(ClassGroup::class)
+            ->createQueryBuilder('class')
+            ->where('class != :current')
+            ->setParameter('current', $classGroup)
+            ->getQuery()
+            ->getResult();
+
         if ($request->isMethod('POST')) {
-            $entityManager->remove($classGroup);
-            $entityManager->flush();
-            $this->addFlash('success', 'ClassGroup deleted successfully');
-            return $this->redirectToRoute('app_classGroups');
+            $newClassGroupId = $request->request->get('new_class_group');
+            $newClassGroup = $entityManager->getRepository(ClassGroup::class)->find($newClassGroupId);
+
+            if ($newClassGroup) {
+                foreach ($students as $student) {
+                    $student->setClassGroup($newClassGroup);
+                }
+
+                $entityManager->remove($classGroup);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Class group reassigned and deleted successfully.');
+                return $this->redirectToRoute('app_classGroups');
+            } else {
+                $this->addFlash('error', 'Selected class group not found.');
+            }
         }
 
         return $this->render('classGroup/delete.html.twig', [
-            'id' => $classGroup->getId(),
+            'classGroup' => $classGroup,
+            'students' => $students,
+            'otherClassGroups' => $otherClassGroups,
         ]);
     }
 }

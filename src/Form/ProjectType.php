@@ -19,7 +19,7 @@ class ProjectType extends AbstractType
             ->add('totalGrade')
             ->add('students', EntityType::class, [
                 'class' => Student::class,
-                'choice_label' => 'lastName' + 'firstName',
+                'choice_label' => fn($student) => strtoupper($student->getLastName()) . ', ' . $student->getFirstName(),
                 'label' => 'Students:',
                 'multiple' => true,
             ])
