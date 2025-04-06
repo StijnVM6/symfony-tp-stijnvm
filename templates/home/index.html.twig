@@ -16,7 +16,25 @@
     <td>
         <a href="{{ path('app_projects') }}">View projects</a>
     </td>
-
+    <td>
+        <a href="{{ path('app_users') }}">View users</a>
+    </td>
 </tr>
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Welcome, {{ app.user.email }}!</p>
+        <a href="{{ path('logout') }}">Logout</a>
+        <a href="{{ path('user_edit', { id: app.user.id }) }}">Edit user</a>
+{% else %}
+    <tr>
+        <td>
+            <a href="{{ path('app_register') }}">Register</a>
+        </td>
+        <td>
+            <a href="{{ path('login') }}">Login</a>
+        </td>
+    </tr>
+{% endif %}
+        
 
 {% endblock %}

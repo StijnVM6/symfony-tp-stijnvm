@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('app_home') }}">Homepage</a>
+
+<h1>Users:</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Email:</th>
+            <th>User role:</th>   
+        </tr>
+    </thead>
+    <tbody> 
+        {% for user in users %}
+        <tr>
+            <td>
+                <a href="{{ path('user_show', { id: user.id }) }}">
+                    {{ user.email }}
+                </a>
+            </td>  
+            <td>
+                <ul>
+                    {% for role in user.roles %}
+                        <li>{{ role }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

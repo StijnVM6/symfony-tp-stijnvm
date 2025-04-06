@@ -29,6 +29,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/project/create', name: 'project_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -49,6 +50,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/project/{id<\d+>}/edit', name: 'project_edit')]
     public function edit(Request $request, Project $project, EntityManagerInterface $entityManager): Response
     {
@@ -66,6 +68,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/project/{id<\d+>}/delete', name: 'project_delete')]
     public function delete(Request $request, Project $project, EntityManagerInterface $entityManager): Response
     {

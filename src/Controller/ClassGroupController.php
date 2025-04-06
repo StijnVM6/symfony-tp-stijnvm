@@ -10,6 +10,7 @@ use App\Entity\ClassGroup;
 use App\Form\ClassGroupType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 final class ClassGroupController extends AbstractController
 {
@@ -29,6 +30,7 @@ final class ClassGroupController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/classGroup/create', name: 'classGroup_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -49,6 +51,7 @@ final class ClassGroupController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/classGroup/{id<\d+>}/edit', name: 'classGroup_edit')]
     public function edit(Request $request, ClassGroup $classGroup, EntityManagerInterface $entityManager): Response
     {
@@ -66,6 +69,7 @@ final class ClassGroupController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/classGroup/{id<\d+>}/delete', name: 'classGroup_delete')]
     public function delete(
         Request $request,

@@ -46,6 +46,7 @@ final class StudentController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/student/create', name: 'student_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -66,6 +67,7 @@ final class StudentController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/student/{id<\d+>}/edit', name: 'student_edit')]
     public function edit(Request $request, Student $student, EntityManagerInterface $entityManager): Response
     {
@@ -83,6 +85,7 @@ final class StudentController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/student/{id<\d+>}/delete', name: 'student_delete')]
     public function delete(Request $request, Student $student, EntityManagerInterface $entityManager): Response
     {
