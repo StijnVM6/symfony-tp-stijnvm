@@ -32,7 +32,18 @@ final class ProjectFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'subject' => implode(' ', self::faker()->words(self::faker()->numberBetween(1, 4))),
+            'subject' => self::faker()->randomElement([
+                'Solar Energy Efficiency',
+                'History of the Renaissance',
+                'Basic Web Development',
+                'Climate Change Analysis',
+                'Physics Lab Report',
+                'AI in Everyday Life',
+                'Robotics and Automation',
+                'Digital Art Portfolio',
+                'World Literature Review',
+                'Biology Field Study',
+            ]),
             'totalGrade' => self::faker()->numberBetween(0, 20),
         ];
     }

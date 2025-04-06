@@ -32,7 +32,18 @@ final class ClassGroupFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'name' => implode(' ', self::faker()->words(self::faker()->numberBetween(1, 2))),
+            'name' => self::faker()->randomElement([
+                'Mathematics',
+                'Physics',
+                'History',
+                'Biology',
+                'Computer Science',
+                'Chemistry',
+                'Literature',
+                'Geography',
+                'Economics',
+                'Art',
+            ]),
             'year' => self::faker()->numberBetween(1, 3),
         ];
     }
